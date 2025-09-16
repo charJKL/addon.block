@@ -6,3 +6,15 @@ const removeRuleIds = [1];
 let rulesUpdated = browser.declarativeNetRequest.updateDynamicRules({addRules, removeRuleIds});
 
 console.log(rulesUpdated);
+
+
+browser.tabs.create({url: "/public/settings.html"});
+
+
+
+
+
+
+
+
+

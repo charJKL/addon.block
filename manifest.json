@@ -13,7 +13,8 @@
 	[
 		"declarativeNetRequest",
 		"nativeMessaging",
-		"scripting"
+		"scripting",
+		"tabs"
 	],
 	"background":
 	{

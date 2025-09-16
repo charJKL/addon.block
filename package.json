@@ -1,0 +1,17 @@
+{
+  "name": "addon.block",
+  "version": "1.0.0",
+  "description": "Addon which block pages.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charJKL/addon.block.git"
+  },
+  "bugs": {
+    "url": "https://github.com/charJKL/addon.block/issues"
+  },
+  "homepage": "https://github.com/charJKL/addon.block#readme",
+
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

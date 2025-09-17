@@ -18,7 +18,7 @@
 	],
 	"background":
 	{
-		"scripts": ["./build/addon.block.js"],
+		"scripts": ["./addon.block.js"],
 		"persistent": false
 	}
 }

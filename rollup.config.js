@@ -5,6 +5,7 @@ import commonjs from '@rollup/plugin-commonjs'; // allow use commonjs modules (n
 import copy from "rollup-plugin-copy";
 import del from "rollup-plugin-delete";
 import replace from '@rollup/plugin-replace';
+import postcss from 'rollup-plugin-postcss'
 
 // clear build folder from previous build
 const delConfig = 
@@ -39,6 +40,12 @@ const settingsRepalceConfig =
 	preventAssignment: false,
 	"process.env.NODE_ENV": '"development"'
 }
+const settingsPostCssConfig =
+{
+    use: [["sass",{silenceDeprecations: ['legacy-js-api']}]], // https://sass-lang.com/documentation/breaking-changes/legacy-js-api/
+    extract: true,
+    modules: true
+}
 export default
 [
     {
@@ -55,6 +62,6 @@ export default
         {
             file: "./build/public/settings.js",
         },
-        plugins: [replace(settingsRepalceConfig), commonjs(), typescript(), nodeResolve(), copy(settingsCopyConfig)] 
+        plugins: [replace(settingsRepalceConfig), commonjs(), typescript(), nodeResolve(), postcss(settingsPostCssConfig), copy(settingsCopyConfig)] 
     }
 ];

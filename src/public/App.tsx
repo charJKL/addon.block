@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import css from "./settings.scss";
 
 export function App()
 {
@@ -11,9 +12,9 @@ export function App()
 
 	return (
 		<main>
-			<header>Main | Other</header>
+			<header className={css.header}>Main | Other</header>
 			<h1>WELCOME TO REACT </h1>
-			<button onClick={onClick}>Click {click}</button>
+			<button className={css.noname} onClick={onClick}>Click {click}</button>
 		</main>
 	);
 }

@@ -10,14 +10,23 @@ const delConfig =
     targets: ['./build/*']
 }	
 // copy icons, and manifest file
-const copyConfig = 
+const addonCopyConfig = 
 {
-    targets: [ 
+    verbose: true,
+    targets: 
+    [ 
         { src: "./src/icon/AddonBlockIcon*.png", dest:"./build" },
         { src: "./src/manifest.json", dest:"./build" }
-    ]
+    ],
 }
-
+const settingsCopyConfig = 
+{
+    verbose: true,
+    targets:
+    [
+        { src: "./src/public/*.html", dest : "./build/public" }
+    ],
+}
 export default
 [
     {
@@ -26,7 +35,7 @@ export default
         {
             file: "./build/addon.block.js",
         },
-        plugins: [typescript(), del(delConfig), copy(copyConfig)]
+        plugins: [typescript(), del(delConfig), copy(addonCopyConfig)]
     },
     {
         input: "./src/public/settings.ts",
@@ -34,6 +43,6 @@ export default
         {
             file: "./build/public/settings.js",
         },
-        plugins: [typescript(), del(delConfig), copy(copyConfig)] 
+        plugins: [typescript(), copy(settingsCopyConfig)] 
     }
 ];

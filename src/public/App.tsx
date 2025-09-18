@@ -7,6 +7,7 @@ export function App()
 
 	const onClick = function()
 	{
+		browser.runtime.sendMessage({messageId: "get/blocked/list", id:23});
 		setClick(click + 1);
 	}
 

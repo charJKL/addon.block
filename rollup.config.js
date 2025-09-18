@@ -1,16 +1,16 @@
 import typescript from "@rollup/plugin-typescript";
-import nodeResolve from '@rollup/plugin-node-resolve'; // include external dependecy into bundle
-import commonjs from '@rollup/plugin-commonjs'; // allow use commonjs modules (needed for react)
+import nodeResolve from "@rollup/plugin-node-resolve"; // include external dependecy into bundle
+import commonjs from "@rollup/plugin-commonjs"; // allow use commonjs modules (needed for react)
 
 import copy from "rollup-plugin-copy";
 import del from "rollup-plugin-delete";
-import replace from '@rollup/plugin-replace';
-import postcss from 'rollup-plugin-postcss'
+import replace from "@rollup/plugin-replace";
+import postcss from "rollup-plugin-postcss";
 
 // clear build folder from previous build
 const delConfig = 
 {
-    targets: ['./build/*']
+    targets: ["./build/*"]
 }	
 // copy icons, and manifest file
 const addonCopyConfig = 
@@ -42,7 +42,7 @@ const settingsRepalceConfig =
 }
 const settingsPostCssConfig =
 {
-    use: [["sass",{silenceDeprecations: ['legacy-js-api']}]], // https://sass-lang.com/documentation/breaking-changes/legacy-js-api/
+    use: [["sass",{silenceDeprecations: ["legacy-js-api"]}]], // https://sass-lang.com/documentation/breaking-changes/legacy-js-api/
     extract: true,
     modules: true
 }

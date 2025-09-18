@@ -15,7 +15,9 @@ browser.tabs.create({url: "/public/settings.html"});
 
 
 
-
+browser.runtime.onMessage.addListener(function(message, sender){
+    console.log("message from frontpage", message, sender);
+});
 
 
 

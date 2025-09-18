@@ -1,4 +1,3 @@
-import { RollupOptions } from "rollup";
 import typescript from "@rollup/plugin-typescript";
 import copy from "rollup-plugin-copy";
 import del from "rollup-plugin-delete";

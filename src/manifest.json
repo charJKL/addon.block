@@ -5,8 +5,8 @@
 	"version": "1.0",
     "icons":
 	{
-		"32": "icon/AddonBlockIcon32x32.png",
-		"64": "icon/AddonBlockIcon64x64.png"
+		"32": "./AddonBlockIcon32x32.png",
+		"64": "./AddonBlockIcon64x64.png"
 	},
 
     "permissions":

@@ -1,1 +1,0 @@
-alert("Welcome on settings page");

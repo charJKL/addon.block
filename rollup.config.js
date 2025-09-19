@@ -46,6 +46,8 @@ const settingsPostCssConfig =
     extract: true,
     modules: true
 }
+
+
 export default
 [
     {

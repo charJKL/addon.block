@@ -12,6 +12,7 @@
   "homepage": "https://github.com/charJKL/addon.block#readme",
   "type": "module",
   "scripts": {
+    "dts": "tcm -p ./**/*.scss -o ./cache ",
     "build": "rollup --config rollup.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -28,7 +29,8 @@
     "rollup-plugin-delete": "^3.0.1",
     "rollup-plugin-postcss": "^4.0.2",
     "sass": "^1.92.1",
-    "tslib": "^2.8.1"
+    "tslib": "^2.8.1",
+    "typed-css-modules": "^0.9.1"
   },
   "dependencies": {
     "react": "^19.1.1",

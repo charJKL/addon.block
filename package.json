@@ -12,7 +12,7 @@
   "homepage": "https://github.com/charJKL/addon.block#readme",
   "type": "module",
   "scripts": {
-    "dts": "tcm -p ./**/*.scss -o ./cache ",
+    "dts": "tcm -p ./src/**/*.scss -o ./cache ",
     "build": "rollup --config rollup.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -1,6 +1,8 @@
 import { useState, MouseEvent } from 'react';
 import css from "./settings.scss";
 
+import { Rules } from "./components/Rules";
+
 export function App()
 {
 	const [click, setClick] = useState(0);
@@ -27,7 +29,7 @@ export function App()
 				</nav>
 			</header>
 			<main className={css.main}>
-				Main Page
+				<Rules />
 			</main>
 		</>
 	);

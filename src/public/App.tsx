@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import css from "./settings.scss";
 
 export function App()
@@ -11,11 +11,24 @@ export function App()
 		setClick(click + 1);
 	}
 
+
+	const menuOnClick = function(e: MouseEvent<HTMLAnchorElement>)
+	{
+		e.preventDefault();
+	}
+
 	return (
-		<main>
-			<header className={css.header}>Main | Other</header>
-			<h1>WELCOME TO REACT </h1>
-			<button className={css.noname} onClick={onClick}>Click {click}</button>
-		</main>
+		<>
+			<header className={css.header}>
+				<nav className={css.nav}>
+					<a href="/rules" className={css.active} onClick={menuOnClick}>Rules</a>
+					<a href="/export" onClick={menuOnClick}>Export</a>
+					<a href="/settings" className={css.navSettings} onClick={menuOnClick}>Settings</a>
+				</nav>
+			</header>
+			<main className={css.main}>
+				Main Page
+			</main>
+		</>
 	);
 }

@@ -1,12 +1,73 @@
+@use "./colors.scss";
+
+$font: "Helvetica", sans-serif;
+$width: 1080px;
+
+
+$headerBorderColor: #999;
+$navBorderColor: colors.$concrete-900;
+
+html
+{
+	height: 100%;
+	overflow: hidden scroll;
+}
 body
 {
-	background: red;
+	height: 100%;
+	margin: 0px;
+	font-family: $font;
 }
+:global #app
+{
+	height: 100%;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+}
+
+
 .header
 {
-	background: yellow;
+	width: 100%;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	border-bottom: solid 1px $headerBorderColor;
 }
-.noname
+.main
 {
-	color: red;
+	width: $width;
+	flex: 1 0 0;
 }
+
+.nav
+{
+	width: $width;	
+	flex: 0 0 0;
+	display: flex;
+	flex-flow: row nowrap;
+	border-bottom: solid 2px $navBorderColor;
+	
+	> a
+	{
+		padding: 10px 15px;
+		text-decoration: none;
+		color: black;
+
+		&:hover
+		{
+			background: #999;
+		}
+		&.active
+		{
+			border-bottom: solid 5px blue;
+		}
+	}
+	> a.navSettings
+	{
+		margin-left: auto;
+	}
+}
+
+

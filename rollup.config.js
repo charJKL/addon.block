@@ -63,6 +63,7 @@ export default
         output: 
         {
             file: "./build/public/settings.js",
+            format: "module"
         },
         plugins: [replace(settingsRepalceConfig), commonjs(), typescript(), nodeResolve(), postcss(settingsPostCssConfig), copy(settingsCopyConfig)] 
     }

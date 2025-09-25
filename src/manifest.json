@@ -16,6 +16,9 @@
 		"scripting",
 		"tabs"
 	],
+	"web_accessible_resources": 
+	[
+	],
 	"background":
 	{
 		"scripts": ["./addon.block.js"],

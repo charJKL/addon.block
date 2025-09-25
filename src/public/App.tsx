@@ -1,5 +1,6 @@
 import { useState, MouseEvent } from 'react';
-import { Routes, Route, NavLink } from "react-router";
+import { Routes, Route } from "react-router";
+import { RelativeNavLink } from "./components/RelativeNavLink";
 
 import css from "./settings.scss";
 
@@ -23,18 +24,14 @@ export function App()
 	{
 		e.preventDefault();
 	}
-	/*
-    <Routes>
-      <Route path="/" element={<App />} />
-    </Routes>
-		*/
+
 	return (
 		<>
 			<header className={css.header}>
 				<nav className={css.nav}>
-					<NavLink to={location.pathname + "/rules"} relative="path"className={({ isActive }) => isActive ? css.active : ""}>Rules</NavLink>
-					<NavLink to="public/settings/export" relative="path">Exports</NavLink>
-					<NavLink to="public/settings/settings" relative="path" className={css.navSettings} >Settings</NavLink>
+					<RelativeNavLink to="/rules" relative="path"className={({ isActive }) => isActive ? css.active : ""}>Rules</RelativeNavLink>
+					<RelativeNavLink to="/export" relative="path">Exports</RelativeNavLink>
+					<RelativeNavLink to="/settings" relative="path" className={css.navSettings} >Settings</RelativeNavLink>
 					{/*
 					<a href="/rules" className={css.active} onClick={menuOnClick}>Rules</a>
 					<a href="/export" onClick={menuOnClick}>Export</a>

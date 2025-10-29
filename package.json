@@ -14,13 +14,17 @@
   "scripts": {
     "dts": "tcm -p ./src/**/*.scss -o ./cache ",
     "build": "rollup --config rollup.config.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build1": "rsbuild build"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.6",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-replace": "^6.0.2",
     "@rollup/plugin-typescript": "^12.1.4",
+    "@rsbuild/core": "^1.5.13",
+    "@rsbuild/plugin-sass": "^1.4.0",
+    "@rsbuild/plugin-typed-css-modules": "^1.1.1",
     "@types/firefox-webext-browser": "^120.0.4",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",

@@ -11,7 +11,7 @@ let rulesUpdated = browser.declarativeNetRequest.updateDynamicRules({addRules, r
 console.log(rulesUpdated);
 
 
-browser.tabs.create({url: "/public/settings.html"});
+browser.tabs.create({url: "/settings.html"});
 
 
 

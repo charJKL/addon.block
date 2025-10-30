@@ -1,5 +1,10 @@
-console.log("Hello World")
-//import {Rule} from "@typ/plugin-typescript";
+import { RulesService as RulesServiceImpl } from "./service/RulesService";
+
+
+const RulesService = new RulesServiceImpl();
+
+
+
 
 type NetRequestRule = browser.declarativeNetRequest.Rule;
 
@@ -15,9 +20,17 @@ browser.tabs.create({url: "/settings.html"});
 
 
 
+
+
 browser.runtime.onMessage.addListener(function(message, sender){
     console.log("message from frontpage", message, sender);
 });
+
+
+
+
+
+
 
 
 

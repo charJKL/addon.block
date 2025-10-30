@@ -1,6 +1,5 @@
 import { useState, MouseEvent } from 'react';
-import { Routes, Route } from "react-router";
-import { RelativeNavLink } from "./components/RelativeNavLink";
+import { Routes, Route, NavLink } from "react-router";
 
 import css from "./settings.module.scss";
 
@@ -29,9 +28,9 @@ export function App()
 		<>
 			<header className={css.header}>
 				<nav className={css.nav}>
-					<RelativeNavLink to="/rules" relative="path" className={({ isActive }) => isActive ? css.active : ""}>Rules</RelativeNavLink>
-					<RelativeNavLink to="/export" relative="path">Exports</RelativeNavLink>
-					<RelativeNavLink to="/settings" relative="path" className={css.navSettings} >Settings</RelativeNavLink>
+					<NavLink to="rules" relative="path" className={({ isActive }) => isActive ? css.active : ""}>Rules</NavLink>
+					<NavLink to="export" relative="path">Exports</NavLink>
+					<NavLink to="settings" relative="path" className={css.navSettings} >Settings</NavLink>
 					{/*
 					<a href="/rules" className={css.active} onClick={menuOnClick}>Rules</a>
 					<a href="/export" onClick={menuOnClick}>Export</a>

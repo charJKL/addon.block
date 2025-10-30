@@ -23,6 +23,7 @@
     "@rollup/plugin-replace": "^6.0.2",
     "@rollup/plugin-typescript": "^12.1.4",
     "@rsbuild/core": "^1.5.13",
+    "@rsbuild/plugin-react": "^1.4.1",
     "@rsbuild/plugin-sass": "^1.4.0",
     "@rsbuild/plugin-typed-css-modules": "^1.1.1",
     "@types/firefox-webext-browser": "^120.0.4",

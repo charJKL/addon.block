@@ -1,9 +1,10 @@
 import { pluginSass } from '@rsbuild/plugin-sass';
 import { pluginTypedCSSModules } from "@rsbuild/plugin-typed-css-modules";
+import { pluginReact } from '@rsbuild/plugin-react';
 
 export default
 {
-    plugins: [pluginSass(), pluginTypedCSSModules()],
+    plugins: [pluginReact(), pluginSass(), pluginTypedCSSModules()],
     source: 
     {
         entry: 
@@ -28,7 +29,7 @@ export default
         ],
         distPath:
         {
-            root: './build',
+            root: "./build/",
         }
     }
 };

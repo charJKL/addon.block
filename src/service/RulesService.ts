@@ -15,7 +15,7 @@ export type Rule =
 export type RuleList = Array<Rule>;
 export type RuleDesc = Pick<Rule, "regexp">;
 export type RuleDescId = Pick<Rule, "id"> | Pick<Rule, "netRequestId"> | UniqueIdString;
-export type DeletedRule = { id: null, netRequestId: null };
+export type RuleDeleted = { id: null, netRequestId: null }; // TODO base this on Rule type like others 
 
 /**
  * IRulesService 
@@ -24,7 +24,7 @@ interface IRulesService
 {
     getRules(): RuleList;
     addRule(ruleDesc: RuleDesc) : Rule;
-    removeRule(ruleDescId: RuleDescId): DeletedRule;
+    removeRule(ruleDescId: RuleDescId): RuleDeleted;
 }
 
 export class RulesService implements IRulesService
@@ -44,7 +44,7 @@ export class RulesService implements IRulesService
         return rule;
     }
 
-    removeRule(ruleDescId: RuleDescId ): DeletedRule
+    removeRule(ruleDescId: RuleDescId ): RuleDeleted
     {
         const rule = { id: null, netRequestId: null, addedTime: 0, regexp: ""}; 
         return rule;

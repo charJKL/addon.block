@@ -29,7 +29,8 @@ export default
 	{
 		copy:
 		[
-			{ from: "./src/manifest.json" }
+			{ from: "./src/manifest.json" },
+			{ from: "./src/icon/BlockDistractingSitesIcon*.png", to: "./icons/[name][ext]" }
 		],
 		distPath:
 		{

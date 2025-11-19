@@ -4,33 +4,36 @@ import { pluginReact } from '@rsbuild/plugin-react';
 
 export default
 {
-    plugins: [pluginReact(), pluginSass(), pluginTypedCSSModules()],
-    source: 
-    {
-        entry: 
-        {
-            addon:
-            {
-                import: "./src/addon.block.ts",
-                filename: "addon.block.js",
-                html: false,
-            },
-            settings: 
-            {
+	plugins: [pluginReact(), pluginSass(), pluginTypedCSSModules()],
+	source: 
+	{
+		entry: 
+		{
+			addon:
+			{
+				import: "./src/addon.block.ts",
+				filename: "addon.block.js",
+				html: false,
+			},
+			settings: 
+			{
 				import: "./src/public/settings/settings.tsx",
 			},
-            }
-        },
-    },
-    output:
-    {
-        copy:
-        [
-            { from: "./src/manifest.json" }
-        ],
-        distPath:
-        {
-            root: "./build/",
-        }
-    }
+			block: 
+			{
+				import: "./src/public/block/block.tsx",
+			}
+		},
+	},
+	output:
+	{
+		copy:
+		[
+			{ from: "./src/manifest.json" }
+		],
+		distPath:
+		{
+			root: "./build/",
+		}
+	}
 };

@@ -1,5 +1,5 @@
 import { Routes, Route, NavLink } from "react-router";
-import css from "./settings.module.scss";
+import css from "./App.module.scss";
 
 import { Rules } from "./components/Rules";
 import { Export } from "./components/Export";

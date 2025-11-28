@@ -17,7 +17,7 @@ export default
 			},
 			settings: 
 			{
-				import: "./src/public/settings/settings.tsx",
+				import: "./src/public/settings/main.tsx",
 			},
 			block: 
 			{

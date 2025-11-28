@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, type ThunkAction, type Action} from "@reduxjs/toolkit";
 
 import { rulesSlice } from "./rulesSlice";
 
@@ -13,3 +13,4 @@ export const Store = configureStore(
 export type RootState = ReturnType<typeof Store.getState>;
 export type AppDispatch = typeof Store.dispatch;
 export type AppStore = typeof Store;
+export type AppThunk = ThunkAction<void, RootState, unknown, Action>

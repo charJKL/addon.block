@@ -5,6 +5,7 @@ import { pluginReact } from '@rsbuild/plugin-react';
 export default
 {
 	plugins: [pluginReact(), pluginSass(), pluginTypedCSSModules()],
+	mode: 'development',
 	source: 
 	{
 		entry: 

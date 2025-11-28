@@ -6,6 +6,10 @@ export default
 {
 	plugins: [pluginReact(), pluginSass(), pluginTypedCSSModules()],
 	mode: 'development',
+	dev: {
+		hmr: false,
+		liveReload: false,
+	},
 	source: 
 	{
 		entry: 

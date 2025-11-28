@@ -1,34 +1,42 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef } from "react"
+import { NavLink } from "react-router";
 import { useAppSelector, useAppDispatch  } from "../store/hooks"; // TODO make alias for this folder
-import { updateList } from "../store//rulesSlice";
+import { getRules, addRule, Status } from "../store/rulesSlice";
+import type { Rule } from "../store/rulesSlice";
 
 export function Rules()
 {
 	const list = useAppSelector(state => state.rules.list);
+	const status = useAppSelector(state => state.rules.get.status);
 	const dispatch = useAppDispatch();
-
-	const addNewRuleHandler = function()
+	console.log("Render rules", "status=", status);
+	useEffect(() => 
 	{
-		dispatch(updateList({name: "newRule", isActive: true}));
+		console.log("useEffect","status=", status);
+		if(status === Status.Idle ) dispatch(getRules());
+	}, [status, dispatch]);
 
-		const message = { endpoint: "POST://rules/$id", data: {regepx: "/^asdasd"} };
-		const onMessage = function(msg: unknown) {
-			console.log("Response recived from background script", msg);
-		}
-		const onError = function(e: unknown)
-		{
-			console.error("Error during reciving response from background script", e);
-		}
- 		browser.runtime.sendMessage(message).then(onMessage).catch(onError);
+	const ref = useRef<HTMLInputElement>(null); // TODO for testing only
+	const onSubmitHandler = function(e: React.FormEvent)
+	{
+		e.preventDefault();
+		const regexp = ref.current?.value;
+		if(regexp == null) return;
+
+		const rule = { id: "newId", netRequestId: 23, addedTime: 234234, regexp };
+		dispatch(addRule(rule));
 	}
 
-	const domList = list.map(r => <RuleRow rule={r}/>);
+	const domList = list.map(r => <RuleRow key={r.id} rule={r}/>);
 	return (
 		<>
 			<section>
 				<div>
-					<input type="text" />
-					<input type="button" value="Add rule" onClick={addNewRuleHandler}/>
+					<h2>Add new rule</h2>
+					<form onSubmit={onSubmitHandler}>
+						<input ref={ref} type="text" id="ruleRegexp" required />
+						<input type="button" value="Add rule" />
+					</form>
 				</div>
 			</section>
 			<section>
@@ -45,5 +53,6 @@ interface RuleRowProps
 
 function RuleRow({rule}: RuleRowProps)
 {
-	return (<div>{rule.name}</div>);
+	const path = `/rule/${rule.id}`;
+	return (<div><NavLink to={path} relative="path">{rule.regexp}</NavLink></div>);
 }

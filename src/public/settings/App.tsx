@@ -1,4 +1,4 @@
-import { Routes, Route, NavLink } from "react-router";
+import { Routes, Route, NavLink, Navigate } from "react-router";
 import css from "./App.module.scss";
 
 import { Rules } from "./components/Rules";
@@ -19,8 +19,9 @@ export function App()
 			</header>
 			<main className={css.main}>
 				<Routes>
-					<Route path="/rules" element={<Rules />} index />
-					<Route path="/export" element={<Export />} />	
+					<Route path="/*" element={<Navigate to="/rules" replace />} />
+					<Route path="/rules" element={<Rules />} />
+					<Route path="/export" element={<Export />} />
 					<Route path="/settings" element={<Settings />} />
 
 					<Route path="/rule/:ruleId" element={<Rule />} />

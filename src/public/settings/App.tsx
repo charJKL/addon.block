@@ -4,6 +4,7 @@ import css from "./App.module.scss";
 import { Rules } from "./components/Rules";
 import { Export } from "./components/Export";
 import { Settings } from "./components/Settings";
+import { Rule } from "./components/Rule";
 
 export function App()
 {
@@ -18,9 +19,11 @@ export function App()
 			</header>
 			<main className={css.main}>
 				<Routes>
-					<Route path="/rules" index element={<Rules />} />
+					<Route path="/rules" element={<Rules />} index />
 					<Route path="/export" element={<Export />} />	
 					<Route path="/settings" element={<Settings />} />
+
+					<Route path="/rule/:ruleId" element={<Rule />} />
 				</Routes>
 			</main>
 		</>

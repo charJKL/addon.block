@@ -18,12 +18,13 @@ body
 	margin: 0px;
 	font-family: $font;
 }
-:global #app
+:global #root
 {
 	height: 100%;
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
+
 }
 
 

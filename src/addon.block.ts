@@ -4,15 +4,16 @@ import { BackendComm as BackendCommApi } from "browser-extension-std/backend";
 
 import { RulesService as RulesServiceImpl} from "./service/RulesService";
 
+// TODO this should go to separate file
 import type { Rule, RuleList, RuleDescId } from "./service/RulesService";
 
-
+export type { Rule, RuleList, RuleDescId } from "./service/RulesService";
 export type REST = 
 {
 	"GET://rules": () => RuleList;
 	"GET://rules/$id": (id: RuleDescId) => Rule;
+	"POST://rules": (rule: Rule) => Rule;
 }
-
 
 const url = "./public/block.html";
 
@@ -20,14 +21,23 @@ const LocalStorage = new LocalStorageApi<{}>({});
 const NetRequest = new NetRequestApi(url);
 const BackendComm = new BackendCommApi<REST>();
 
-
 const rulesService = new RulesServiceImpl(LocalStorage, NetRequest);
 
 BackendComm.addEndpointListener("GET://rules", function()
 {
-	console.log("Addon.block.ts::GET://rules");
-	return [];
+	console.log("Background", "GET://rules");
+	return [
+		{ id: "1a1a1a1a1a1a1a", netRequestId: 1, addedTime: 21313215, regexp: "www.onet.pl" },
+		{ id: "2b2b2b2b2b2b2b", netRequestId: 2, addedTime: 21313215, regexp: "www.interia.pl" },
+		{ id: "3c3c3c3c3c3c3c", netRequestId: 3, addedTime: 21313215, regexp: "www.wp.pl" },
+	];
 });
+BackendComm.addEndpointListener("POST://rules", function(rule: Rule)
+{
+	console.log("Background", "POST://rules", rule);
+	return { id: "4d4d4d4d44d4d", netRequestId: 4, addedTime: 21313215, regexp: "www.onet.pogoda.pl" };
+});
+
 
 BackendComm.addEndpointListener("GET://rules/$id", function(id: RuleDescId)
 {

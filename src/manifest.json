@@ -12,6 +12,7 @@
 	[
 		"declarativeNetRequest",
 		"nativeMessaging",
+		"storage",
 		"scripting",
 		"tabs"
 	],

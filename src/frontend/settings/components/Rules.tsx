@@ -1,8 +1,12 @@
 import { useEffect, useRef } from "react"
 import { NavLink } from "react-router";
-import { useAppSelector, useAppDispatch  } from "../store/hooks"; // TODO make alias for this folder
-import { getRules, addRule, Status } from "../store/rulesSlice";
-import type { Rule } from "../store/rulesSlice";
+import { useAppSelector, useAppDispatch  } from "@/frontend/store/hooks"; // TODO make alias for this folder
+import { getRules, addRule, Status } from "@/frontend/store/rulesSlice";
+import type { Rule } from "@/frontend/store/rulesSlice";
+
+// import type { Rule } from "@/frontend/store/slice"
+// impoty type { Rule } from "@/store/slice"
+
 
 export function Rules()
 {
@@ -35,7 +39,7 @@ export function Rules()
 					<h2>Add new rule</h2>
 					<form onSubmit={onSubmitHandler}>
 						<input ref={ref} type="text" id="ruleRegexp" required />
-						<input type="button" value="Add rule" />
+						<input type="submit" value="Add rule" />
 					</form>
 				</div>
 			</section>

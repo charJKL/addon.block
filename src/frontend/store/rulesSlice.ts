@@ -3,7 +3,7 @@ import { type RootState } from './Store';
 import { createAppAsyncThunk } from "./hooks";
 
 import { FrontendComm as FrontendCommApi } from "browser-extension-std/frontend"; // TODO move this to other file
-import type { REST, RuleList, Rule} from "../../../addon.block";
+import type { REST, RuleList, Rule} from "@/backend/addon.block";
 const FrontendComm = new FrontendCommApi<REST>(); // TODO move this initialization to separate file
 
 export type { Rule };

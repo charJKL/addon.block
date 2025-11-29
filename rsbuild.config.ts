@@ -16,17 +16,17 @@ export default
 		{
 			addon:
 			{
-				import: "./src/addon.block.ts",
+				import: "./src/backend/addon.block.ts",
 				filename: "addon.block.js",
 				html: false,
 			},
 			settings: 
 			{
-				import: "./src/public/settings/main.tsx",
+				import: "./src/frontend/settings/main.tsx",
 			},
 			block: 
 			{
-				import: "./src/public/block/block.tsx",
+				import: "./src/frontend/block/block.tsx",
 			}
 		},
 	},

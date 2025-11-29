@@ -3,7 +3,7 @@ import { type RootState } from './Store';
 import { createAppAsyncThunk } from "./hooks";
 
 import { FrontendComm as FrontendCommApi } from "browser-extension-std/frontend"; // TODO move this to other file
-import type { REST, RuleList, Rule} from "@/backend/addon.block";
+import type { REST, RuleList, RuleDesc, Rule} from "@/backend/addon.block";
 const FrontendComm = new FrontendCommApi<REST>(); // TODO move this initialization to separate file
 
 export type { Rule };
@@ -69,7 +69,7 @@ export const getRules = createAppAsyncThunk(
 		condition: (arg, api) => api.getState().rules.get.status == Status.Idle
 	}
 );
-export const addRule = createAppAsyncThunk("rules/addRule", async (rule: Rule) => 
+export const addRule = createAppAsyncThunk("rules/addRule", async (rule: RuleDesc) => 
 {
 	console.log("Frontend", "addRuleThunk");
 	const response = await FrontendComm.sendToEndpoint("POST://rules", [rule]);

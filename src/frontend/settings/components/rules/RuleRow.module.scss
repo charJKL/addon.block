@@ -1,0 +1,27 @@
+.RuleRow
+{
+	display: flex;
+	flex-flow: row nowrap;
+	border-bottom: solid 1px #999;
+	margin: 2px 0px;
+}
+.Id
+{
+	flex: 0 0 200px;
+}
+.NetRequestId
+{
+	flex: 0 0 50px;
+}
+.Name
+{
+	flex: 1 0 0;
+}
+.Time
+{
+	flex: 0 0 100px;
+}
+.Actions
+{
+	flex: 0 0 100px;
+}

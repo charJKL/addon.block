@@ -24,7 +24,7 @@ export function App()
 					<Route path="/export" element={<Export />} />
 					<Route path="/settings" element={<Settings />} />
 
-					<Route path="/rule/:ruleId" element={<Rule />} />
+					<Route path="/rule/:id" element={<Rule />} />
 				</Routes>
 			</main>
 		</>

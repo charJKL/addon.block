@@ -13,10 +13,8 @@ export function Rules()
 	const list = useAppSelector(state => state.rules.list);
 	const status = useAppSelector(state => state.rules.get.status);
 	const dispatch = useAppDispatch();
-	console.log("Render rules", "status=", status);
 	useEffect(() => 
 	{
-		console.log("useEffect","status=", status);
 		if(status === Status.Idle ) dispatch(getRules());
 	}, [status, dispatch]);
 
@@ -27,7 +25,7 @@ export function Rules()
 		const regexp = ref.current?.value;
 		if(regexp == null) return;
 
-		const rule = { id: "newId", netRequestId: 23, addedTime: 234234, regexp };
+		const rule = { simplified: regexp };
 		dispatch(addRule(rule));
 	}
 

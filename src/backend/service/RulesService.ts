@@ -1,6 +1,6 @@
 import { LocalStorage } from "browser-extension-std/backend";
 import { NetRequest } from "browser-extension-std/backend";
-import { DateEx, hasProp, isNull, isUndefined } from "browser-extension-std/ex";
+import { ArrayEx, DateEx, hasProp, isNull, isUndefined } from "browser-extension-std/ex";
 
 
 export type UniqueIdString = string;
@@ -16,9 +16,12 @@ export type Rule =
 }
 export type RuleList = Array<Rule>;
 export type RuleDesc = { simplified: string } | { regexp: string };
-export type RuleDescId = Pick<Rule, "id"> | Pick<Rule, "netRequestId"> | UniqueIdString;
-export type RuleDeleted = { id: null, netRequestId: null }; // TODO base this on Rule type like others 
+export type RuleDescId = {id: UniqueIdString , netRequestId?: UniqueIdNumber } | {id?: UniqueIdString , netRequestId: UniqueIdNumber } 
+type MakeNullable<T, U extends keyof T> = { [Key in keyof T]: Key extends U ? T[Key] | null : T[Key]; } // TODO move this to some file
+export type RuleDeleted = MakeNullable<Rule, "id" | "netRequestId">
 export type RulesStorageBlueprint = { rules: RuleList };
+
+
 
 /**
  * IRulesService 
@@ -27,7 +30,7 @@ interface IRulesService
 {
 	getRules(): Promise<RuleList>;
 	addRule(ruleDesc: RuleDesc) : Promise<Rule>;
-	removeRule(ruleDescId: RuleDescId): RuleDeleted;
+	removeRule(ruleIdDesc: RuleDescId): Promise<RuleDeleted>;
 }
 
 export class RulesService implements IRulesService
@@ -72,10 +75,25 @@ export class RulesService implements IRulesService
 		return rule;
 	}
 
-	public removeRule(ruleDescId: RuleDescId ): RuleDeleted
+	public async removeRule(ruleIdDesc: RuleDescId ): Promise<RuleDeleted>
 	{
-		const rule = { id: null, netRequestId: null, addedTime: 0, regexp: ""}; 
-		return rule;
+		const rules = await this.$storage.get("rules");
+
+		const id = ruleIdDesc.id ?? null;
+		const netRequestId = ruleIdDesc.netRequestId ?? null;
+
+		const findRuleByIdOrRequestId = (rule: Rule) => rule.id === id || rule.netRequestId === netRequestId;
+		const rule = rules.find(findRuleByIdOrRequestId);
+		if(isUndefined(rule)) throw new Error("Rule you want to delete doesnt exist");
+
+		const netRequestRuleIdDesc = { id: rule.netRequestId };
+		const result = await this.$netRequest.removeDynamicRule(netRequestRuleIdDesc);
+
+		const newRules = ArrayEx.remove(rules, rule);
+		const save = await this.$storage.set("rules", newRules);
+
+		const removed = { ...rule, id: null, netRequestId: null };
+		return removed;
 	}
 
 	private generateUniqueId(list: RuleList) : string

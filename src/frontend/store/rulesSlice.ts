@@ -4,6 +4,7 @@ import { createAppAsyncThunk } from "./hooks";
 
 import { FrontendComm as FrontendCommApi } from "browser-extension-std/frontend"; // TODO move this to other file
 import type { REST, RuleList, RuleDesc, Rule, RuleDescId} from "@/backend/addon.block";
+import { ArrayEx } from "../../../../browser-extension-std/dist/ex/ArrayEx";
 const FrontendComm = new FrontendCommApi<REST>(); // TODO move this initialization to separate file
 
 export type { Rule };
@@ -53,6 +54,12 @@ const slice = createSlice(
 			state.post.status = Status.Pending;
 			state.list.push(action.payload);
 		});
+
+		builder.addCase(removeRule.fulfilled, (state, action) => 
+		{
+			const i = state.list.findIndex(rule => rule.id == action.payload.id || rule.netRequestId == action.payload.netRequestId);
+			state.list.splice(i, 1);
+		})
 	}
 });
 
@@ -79,7 +86,10 @@ export const addRule = createAppAsyncThunk("rules/addRule", async (rule: RuleDes
 export const removeRule = createAppAsyncThunk("rules/removeRule", async (rule: RuleDescId) =>
 {
 	console.log("Frontend", "Send delete message to backend", rule);
+	const response = await FrontendComm.sendToEndpoint("DELETE://rules/$id", [rule]);
+	return rule;
 })
+
 
 export const selectList = (state: RootState) => state.rules.list;
 export const selectRuleById = (id: string) => (state: RootState) : Rule | null => state.rules.list.find(rule => rule.id === id) ?? null;

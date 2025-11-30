@@ -3,7 +3,7 @@ import { type RootState } from './Store';
 import { createAppAsyncThunk } from "./hooks";
 
 import { FrontendComm as FrontendCommApi } from "browser-extension-std/frontend"; // TODO move this to other file
-import type { REST, RuleList, RuleDesc, Rule} from "@/backend/addon.block";
+import type { REST, RuleList, RuleDesc, Rule, RuleDescId} from "@/backend/addon.block";
 const FrontendComm = new FrontendCommApi<REST>(); // TODO move this initialization to separate file
 
 export type { Rule };
@@ -76,8 +76,14 @@ export const addRule = createAppAsyncThunk("rules/addRule", async (rule: RuleDes
 	console.log("Frontend", "addRuleThunk", "response=", response);
 	return response;
 });
+export const removeRule = createAppAsyncThunk("rules/removeRule", async (rule: RuleDescId) =>
+{
+	console.log("Frontend", "Send delete message to backend", rule);
+})
 
-export const SelectList = (state: RootState) => state.rules.list;
+export const selectList = (state: RootState) => state.rules.list;
+export const selectRuleById = (id: string) => (state: RootState) : Rule | null => state.rules.list.find(rule => rule.id === id) ?? null;
+
 
 export const { updateList } = slice.actions;
 export const rulesSlice = slice.reducer;

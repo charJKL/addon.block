@@ -13,13 +13,14 @@
   "type": "module",
   "scripts": {
     "build": "rsbuild build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "rstest"
   },
   "devDependencies": {
     "@rsbuild/core": "^1.5.13",
     "@rsbuild/plugin-react": "^1.4.1",
     "@rsbuild/plugin-sass": "^1.4.0",
     "@rsbuild/plugin-typed-css-modules": "^1.1.1",
+    "@rstest/core": "^0.6.8",
     "@types/firefox-webext-browser": "^120.0.4",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9"

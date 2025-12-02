@@ -1,7 +1,7 @@
 import { LocalStorage } from "browser-extension-std/backend";
 import { NetRequest } from "browser-extension-std/backend";
-import { ArrayEx, DateEx, hasProp, isNull, isUndefined } from "browser-extension-std/ex";
-
+import { ArrayEx, DateEx, isUndefined } from "browser-extension-std/ex";
+import { type IRuleDescStrategy, BasicRuleDescStrategy } from "./sub/BasicRuleDescStrategy";
 
 export type UniqueIdString = string;
 export type UniqueIdNumber = number;
@@ -21,8 +21,6 @@ type MakeNullable<T, U extends keyof T> = { [Key in keyof T]: Key extends U ? T[
 export type RuleDeleted = MakeNullable<Rule, "id" | "netRequestId">
 export type RulesStorageBlueprint = { rules: RuleList };
 
-
-
 /**
  * IRulesService 
  */
@@ -37,6 +35,7 @@ export class RulesService implements IRulesService
 {
 	private readonly $storage: LocalStorage<RulesStorageBlueprint>;
 	private readonly $netRequest: NetRequest;
+	private readonly $ruleDesc: IRuleDescStrategy;
 
 	public constructor(storage: LocalStorage<{}>, netRequest: NetRequest)
 	{
@@ -44,6 +43,7 @@ export class RulesService implements IRulesService
 
 		this.$storage = storage.init(STORAGE_DEFAULT_VALUE);
 		this.$netRequest = netRequest;
+		this.$ruleDesc = new BasicRuleDescStrategy();
 	}
 
 	public async getRules() : Promise<RuleList>
@@ -56,7 +56,7 @@ export class RulesService implements IRulesService
 		console.log("RuleService", "ruleDesc=", ruleDesc);
 		const rules = await this.$storage.get("rules");
 
-		const { simplified, regexp } = this.resolveRuleType(ruleDesc);
+		const { simplified, regexp } = this.$ruleDesc.buildRuleDesc(ruleDesc);
 
 		const notRegisteredRule = 
 		{
@@ -103,28 +103,5 @@ export class RulesService implements IRulesService
 		let id = getRandomId();
 		while(list.find((rule) => rule.id === id)) {id = getRandomId(); console.log(id);}
 		return id;
-	}
-
-	private resolveRuleType(rule: RuleDesc) : { simplified: string, regexp: string }
-	{
-		const SIMPLIFIED_REGEXP = /^(?<protocol>https?:)?(?<www>www\.)?(?<domain>[a-zA-Z0-9_&+-]+(\.[a-zA-Z0-9&_+-]+)+)(?<path>\/[a-zA-Z0-9~!@#$%^&*()\-_=+{};:,.?\\\/]+\/?)?$/
-		if(hasProp(rule, "simplified"))
-		{
-			const result = SIMPLIFIED_REGEXP.exec(rule.simplified);
-			if(isNull(result)) throw new Error("Simplified pattern is not supported.");
-			if(isUndefined(result.groups)) throw new Error("Simplified patter is not valid.");
-			const protocol = result.groups.protocol;
-			const www = result.groups.www;
-			const domain = result.groups.domain.replaceAll(".", "\.");
-			const path = result.groups.path; // TODO trim paths from prefix and suffix
-			// TODO builded regexp is not valid!, move it to separate class and unit test it.
-			const regexp = `(http|https)://(www)?${domain}/${path}`; // TODO check if user want protocol and www.
-			return { simplified: rule.simplified, regexp };
-		}
-		if(hasProp(rule, "regexp"))
-		{
-			return { simplified: "", regexp: rule.regexp };
-		}
-		throw new Error("Unreachable code.");
 	}
 }

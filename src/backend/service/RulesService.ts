@@ -67,7 +67,9 @@ export class RulesService implements IRulesService
 			regexp,
 		}
 
-		const netRequestRuleDesc = { regexp: new RegExp(regexp) }
+		const redirectUrl = browser.runtime.getURL("/block.html"); // TODO this should be inject in constructor
+		console.log("RuleService", "Add new rule=", notRegisteredRule, redirectUrl)
+		const netRequestRuleDesc = { regexp: new RegExp(regexp), to: redirectUrl };
 		const result = await this.$netRequest.addDynamicRule(netRequestRuleDesc);
 		const rule = { ...notRegisteredRule, netRequestId: result.id };
 		const save = await this.$storage.set("rules", [...rules, rule]);
